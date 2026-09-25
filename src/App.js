@@ -1,23 +1,12 @@
 import { useState } from 'react';
+import FormularioNumeros from './FormularioNumeros';
 import ListadoResultados from './ListadoResultados';
 
 function App() {
   const [operaciones, setOperacion] = useState([]);
 
-  function operar(tipo) {
-    // Obtenemos los inputs a través de sus IDs
-    const input1 = document.getElementById('valor1');
-    const input2 = document.getElementById('valor2');
-
-    const v1 = parseFloat(input1.value);
-    const v2 = parseFloat(input2.value);
-
-    // Validación básica de campos vacíos o no numéricos
-    if (isNaN(v1) || isNaN(v2)) {
-      alert('Por favor, ingrese ambos números.');
-      return;
-    }
-
+  // Función que se ejecuta cuando el hijo emite el evento onCalcular
+  function calcularResultado(v1, v2, tipo) {
     let res = 0;
     let simbolo = '';
 
@@ -35,10 +24,6 @@ function App() {
         simbolo = '*';
         break;
       case 'division':
-        if (v2 === 0) {
-          alert('No es posible dividir por cero.');
-          return;
-        }
         res = v1 / v2;
         simbolo = '/';
         break;
@@ -53,31 +38,16 @@ function App() {
       resultado: res
     };
 
-    // Agrega el nuevo resultado al inicio de la lista
+    // Agrega la nueva operación al inicio del historial
     setOperacion([nuevo, ...operaciones]);
-
-    // Limpia los campos
-    input1.value = '';
-    input2.value = '';
-    input1.focus();
   }
 
   return (
     <div style={{ padding: '20px' }}>
-      <h2>Calculadora con Historial</h2>
-      <p>
-        Ingrese primer valor: <input type="number" id="valor1" />
-      </p>
-      <p>
-        Ingrese segundo valor: <input type="number" id="valor2" />
-      </p>
-
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '15px' }}>
-        <button onClick={() => operar('suma')}>Sumar</button>
-        <button onClick={() => operar('resta')}>Restar</button>
-        <button onClick={() => operar('multiplicacion')}>Multiplicar</button>
-        <button onClick={() => operar('division')}>Dividir</button>
-      </div>
+      <h2>Calculadora Modular (Eventos entre Componentes)</h2>
+      
+      {/* Pasamos la función callback mediante la prop onCalcular */}
+      <FormularioNumeros onCalcular={calcularResultado} />
 
       <hr />
       <h3>Historial de Operaciones</h3>
