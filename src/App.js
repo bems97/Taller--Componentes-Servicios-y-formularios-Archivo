@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import FormularioNumeros from './FormularioNumeros';
 import ListadoResultados from './ListadoResultados';
+import CambioTitulo from './CambioTitulo';
 
 function App() {
   const [operaciones, setOperacion] = useState([]);
 
-  // Función que se ejecuta cuando el hijo emite el evento onCalcular
   function calcularResultado(v1, v2, tipo) {
     let res = 0;
     let simbolo = '';
@@ -24,6 +24,10 @@ function App() {
         simbolo = '*';
         break;
       case 'division':
+        if (v2 === 0) {
+          alert('No es posible dividir por cero.');
+          return;
+        }
         res = v1 / v2;
         simbolo = '/';
         break;
@@ -38,20 +42,21 @@ function App() {
       resultado: res
     };
 
-    // Agrega la nueva operación al inicio del historial
     setOperacion([nuevo, ...operaciones]);
   }
 
   return (
     <div style={{ padding: '20px' }}>
+      {/* Ejercicio anterior de Calculadora */}
       <h2>Calculadora Modular (Eventos entre Componentes)</h2>
-      
-      {/* Pasamos la función callback mediante la prop onCalcular */}
       <FormularioNumeros onCalcular={calcularResultado} />
 
       <hr />
       <h3>Historial de Operaciones</h3>
       <ListadoResultados resultados={operaciones} />
+
+      {/* Ejemplo 2 del taller */}
+      <CambioTitulo />
     </div>
   );
 }
