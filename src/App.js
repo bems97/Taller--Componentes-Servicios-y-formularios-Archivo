@@ -2,6 +2,7 @@ import { useState } from 'react';
 import FormularioNumeros from './FormularioNumeros';
 import ListadoResultados from './ListadoResultados';
 import CambioTitulo from './CambioTitulo';
+import TablaArticulos from './TablaArticulos';
 
 function App() {
   const [operaciones, setOperacion] = useState([]);
@@ -47,7 +48,7 @@ function App() {
 
   return (
     <div style={{ padding: '20px' }}>
-      {/* Ejercicio anterior de Calculadora */}
+      {/* Punto 1 y 2: Calculadora y comunicación de eventos */}
       <h2>Calculadora Modular (Eventos entre Componentes)</h2>
       <FormularioNumeros onCalcular={calcularResultado} />
 
@@ -55,8 +56,11 @@ function App() {
       <h3>Historial de Operaciones</h3>
       <ListadoResultados resultados={operaciones} />
 
-      {/* Ejemplo 2 del taller */}
+      {/* Punto 3 (Ejemplo 2): useEffect para el DOM */}
       <CambioTitulo />
+
+      {/* Punto 4: Consumo de API con fetch */}
+      <TablaArticulos />
     </div>
   );
 }
