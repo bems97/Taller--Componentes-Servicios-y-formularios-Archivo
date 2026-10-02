@@ -3,6 +3,8 @@ import FormularioNumeros from './FormularioNumeros';
 import ListadoResultados from './ListadoResultados';
 import CambioTitulo from './CambioTitulo';
 import TablaArticulos from './TablaArticulos';
+import TablaArticulosOriginal from './TablaArticulosOriginal';
+import UsuariosApi from './UsuariosApi';
 
 function App() {
   const [operaciones, setOperacion] = useState([]);
@@ -48,7 +50,7 @@ function App() {
 
   return (
     <div style={{ padding: '20px' }}>
-      {/* Punto 1 y 2: Calculadora y comunicación de eventos */}
+      {/* Puntos 1 y 2: Calculadora y eventos */}
       <h2>Calculadora Modular (Eventos entre Componentes)</h2>
       <FormularioNumeros onCalcular={calcularResultado} />
 
@@ -56,11 +58,17 @@ function App() {
       <h3>Historial de Operaciones</h3>
       <ListadoResultados resultados={operaciones} />
 
-      {/* Punto 3 (Ejemplo 2): useEffect para el DOM */}
+      {/* Punto 3: useEffect para manipular el DOM */}
       <CambioTitulo />
 
-      {/* Punto 4: Consumo de API con fetch */}
+      {/* Punto 4: Tabla de artículos de la guía */}
       <TablaArticulos />
+
+      {/* Punto 4 (Original): URL con bloqueo mostrando 'Recuperando datos...' */}
+      <TablaArticulosOriginal />
+
+      {/* Consumo real en vivo de API REST externa pública */}
+      <UsuariosApi />
     </div>
   );
 }
