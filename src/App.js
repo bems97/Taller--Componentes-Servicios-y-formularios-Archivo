@@ -7,6 +7,7 @@ import TablaArticulosOriginal from './TablaArticulosOriginal';
 import UsuariosApi from './UsuariosApi';
 import ListaArticulosBorrado from './ListaArticulosBorrado';
 import FormularioPersona from './FormularioPersona';
+import FormularioCompleto from './FormularioCompleto';
 
 function App() {
   const [operaciones, setOperacion] = useState([]);
@@ -71,8 +72,11 @@ function App() {
       {/* Punto 5 */}
       <ListaArticulosBorrado />
 
-      {/* Punto 6.1: Formularios controlados */}
+      {/* Punto 6.1 */}
       <FormularioPersona />
+
+      {/* Formulario con 5 controles y resumen de envío */}
+      <FormularioCompleto />
     </div>
   );
 }
